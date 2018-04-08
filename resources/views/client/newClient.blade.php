@@ -8,11 +8,9 @@
           <div class="medium-4  columns">
             <label>Title</label>
             <select name="form[title]">
-                          <option value="mr" selected="selected">Mr.</option>
-                          <option value="ms">Ms.</option>
-                          <option value="mrs">Mrs.</option>
-                          <option value="dr">Dr.</option>
-                          <option value="mx">Mx.</option>
+                @foreach($titles as $title)         
+                <option value="{{$title}}" >{{$title}}</option>
+                @endforeach         
                         </select>
           </div>
           <div class="medium-4  columns">
