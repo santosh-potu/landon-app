@@ -20,6 +20,26 @@
             <li role="menuitem"><a href="{{ route('clients') }}">Clients</a></li>
           </ul>
         </div>
+        
+        @if(Auth::user())
+          @auth  
+        <div class="top-bar-right">
+          <ul class="dropdown menu" data-dropdown-menu="tckp8q-dropdown-menu" role="menubar">
+              <li role="menuitem">
+                  <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                           Logout
+                                       </a>
+
+                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                           {{ csrf_field() }}
+                                       </form>
+              </li>            
+          </ul>
+        </div> 
+        @endauth 
+        @endif
       </div>
     </div>
     <!-- End Top Bar -->
