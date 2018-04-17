@@ -19,7 +19,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
     Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
     Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom')->name('book_room');
-
+    Route::get('export','ClientController@export');
+    Route::get('upload','ContentsController@upload')->name('upload');
+    Route::post('upload','ContentsController@upload')->name('upload');
 });
 Route::get('/', 'ContentsController@home')->name('home');
 

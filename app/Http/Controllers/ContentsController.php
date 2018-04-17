@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ContentsController extends Controller
 {
@@ -17,5 +18,20 @@ class ContentsController extends Controller
         $data['last_updated'] = $last_updated;
         
         return view('contents/home',$data);
+    }
+    
+    public function upload(Request $request)
+    {
+        if($request->isMethod('post')){
+            $this->validate(
+                    $request,
+                    [
+                        'image_upload' => 'mimes:jpeg,png,bmp'
+                    ]
+                    );
+            Input::file('image_upload')->move('images','attractions.jpg');
+            return redirect('/');
+        }
+        return view('contents/upload');
     }
 }
