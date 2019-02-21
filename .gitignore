@@ -1,4 +1,4 @@
-nbproject/
-.idea/
+/nbproject
+/.idea
 .env
-vendor/
+/vendor
