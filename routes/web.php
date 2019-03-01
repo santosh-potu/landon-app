@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware('auth')->group(function(){
-    Route::get('/clients', 'ClientController@index')->name('clients')->middleware('auth');
+use Illuminate\Support\Facades\Log;
+
+Route::group(['middleware' => ['cors','auth']],function(){
+    Route::get('/clients', 'ClientController@index')->name('clients'); //->middleware('auth')
     Route::get('/clients/new', 'ClientController@newClient')->name('new_client');
     Route::post('/clients/new', 'ClientController@newClient')->name('create_client');
     Route::get('/clients/{client_id}', 'ClientController@show')->name('show_client');
@@ -23,6 +25,12 @@ Route::middleware('auth')->group(function(){
     Route::get('upload','ContentsController@upload')->name('upload');
     Route::post('upload','ContentsController@upload')->name('upload');
 });
+
+
+
+
+
+
 Route::get('/', 'ContentsController@home')->name('home');
 
 Route::get('/about', function () {
@@ -31,7 +39,7 @@ Route::get('/about', function () {
     $response_arr['version'] = '0.1.1';
     return $response_arr;
     //return '<h3>About</h3>';
-});
+})->middleware('cors');
 
 Route::get('/home', function () {
     $data = [];
@@ -61,3 +69,25 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/generate/password',function(){  return bcrypt('123456789');});
+
+
+Route::group(['middleware'=>'cors'],function(){
+    $routeCollection = Route::getRoutes();
+    foreach ($routeCollection as $value) {
+        $uri_path = $value->uri();
+        $action = $value->getActionName();
+        $action_path = class_basename($action);
+        if($action_path != 'Closure'){
+            Route::options($uri_path,$action_path);
+        }
+    }
+});
+/*
+
+  Route::options('/{any}', function(){
+
+
+    return '';
+})->where('any', '.*')->middleware('cors');
+*/
+
