@@ -47,6 +47,13 @@ Route::get('/home', function () {
     return view('welcome', $data);
 });
 
+Route::get('welcome/{locale}',function($locale){
+
+    App::setLocale($locale);
+    return view('language_locale');
+    
+});
+
 Route::get('/di', 'ClientController@di');
 
 Route::get('/facades/db', function () {
