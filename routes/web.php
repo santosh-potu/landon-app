@@ -47,35 +47,9 @@ Route::get('/home', function () {
     return view('welcome', $data);
 });
 
-Route::get('welcome/{locale}',function($locale){
-
-    App::setLocale($locale);
-    return view('language_locale');
-    
-});
-
 Route::get('/di', 'ClientController@di');
 
-Route::get('/facades/db', function () {
-    
-    return DB::select('SELECT * from table');
-});
-
-Route::get('/facades/encrypt', function () {
-    
-    return Crypt::encrypt('123456789');
-});
-
-//eyJpdiI6IjVuV1lWR3JXRlFmdGFHbXljN0Vodnc9PSIsInZhbHVlIjoibEpLQWJSdmgybDBXRHdjNDJadERwM0lZRWlLZnA5d2hcL1wvMHdCNEpCSklFPSIsIm1hYyI6ImE1NDQxZDhiMTAyNjQyNTZkOTZlY2NkZTdmNmIxYThhNjU1OTI2MGI2OTFmYWUxNmRlODk1ZDNiODgxMTY3YzAifQ==
-
-Route::get('/facades/decrypt', function () {
-    
-    return Crypt::decrypt('eyJpdiI6IjVuV1lWR3JXRlFmdGFHbXljN0Vodnc9PSIsInZhbHVlIjoibEpLQWJSdmgybDBXRHdjNDJadERwM0lZRWlLZnA5d2hcL1wvMHdCNEpCSklFPSIsIm1hYyI6ImE1NDQxZDhiMTAyNjQyNTZkOTZlY2NkZTdmNmIxYThhNjU1OTI2MGI2OTFmYWUxNmRlODk1ZDNiODgxMTY3YzAifQ==');
-});
 Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/generate/password',function(){  return bcrypt('123456789');});
 
 
 Route::group(['middleware'=>'cors'],function(){
@@ -89,12 +63,4 @@ Route::group(['middleware'=>'cors'],function(){
         }
     }
 });
-/*
-
-  Route::options('/{any}', function(){
-
-
-    return '';
-})->where('any', '.*')->middleware('cors');
-*/
 
