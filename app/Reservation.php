@@ -9,11 +9,11 @@ class Reservation extends Model
     //
     public function client()
     {
-        return $this->belongsTo('App\Client','client_id','id');
+        return $this->belongsTo('App\Client','client_id','id'); // no need of columns here
     }
     
     public function room()
     {
-        return $this->belongsTo('App\Room','room_id','id');
+        return $this->belongsTo('App\Room','room_id','id'); // no need of columns here
     }
 }
